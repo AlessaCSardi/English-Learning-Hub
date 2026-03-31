@@ -1,24 +1,23 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $student = $_POST['studentName'];
-    $assignment = $_POST['assignment'];
-    $comments = $_POST['comments'];
+    $student = $_POST['studentName'] ?? 'Unknown';
+    $assignment = $_POST['assignment'] ?? 'None';
+    $comments = $_POST['comments'] ?? '';
     $timestamp = date("Y-m-d H:i:s");
 
-    // File info
-    $fileName = $_FILES['fileUpload']['name'];
+    $fileName = $_FILES['fileUpload']['name'] ?? 'no_file.txt';
     
-    // Data to log
+    // Create the log entry
     $logEntry = "[$timestamp] Student: $student | Assignment: $assignment | File: $fileName | Notes: $comments\n";
 
-    // Save metadata to a text file (ensure the directory has write permissions)
-    file_put_contents('submissions_log.txt', $logEntry, FILE_APPEND);
-
-    // Basic success message
-    echo "<h1>Submission Successful!</h1>";
-    echo "<p>Your file <strong>$fileName</strong> for $assignment has been received.</p>";
-    echo "<a href='index.html'>Return to Dashboard</a>";
-} else {
-    echo "Invalid Request.";
+    // Attempt to save. Note: This only works on a real PHP server (like XAMPP or Heroku), not GitHub itself.
+    if(file_put_contents('submissions_log.txt', $logEntry, FILE_APPEND)) {
+        echo "<h1>✅ Submission Successful!</h1>";
+        echo "<p>Received: <strong>$fileName</strong></p>";
+    } else {
+        echo "<h1>❌ Error</h1><p>Check folder permissions.</p>";
+    }
+    
+    echo "<br><a href='index.html'>Go Back</a>";
 }
 ?>
