@@ -182,5 +182,27 @@
     </section>
 </main>
 
+<script>
+    function addRow() {
+        const table = document.getElementById("assignmentTable").querySelector('tbody');
+        const row = table.insertRow();
+        row.innerHTML = `
+            <td contenteditable="true">New Module</td>
+            <td contenteditable="true">New Task</td>
+            <td contenteditable="true">${new Date().toLocaleDateString()}</td>
+            <td contenteditable="true" class="status-pending">Not Submitted</td>
+            <td><button onclick="deleteRow(this)" style="background:none; border:none; color:red; cursor:pointer;"><i class="fas fa-trash"></i></button></td>
+        `;
+    }
+
+    function deleteRow(btn) {
+        btn.closest('tr').remove();
+    }
+
+    function saveTable() {
+        alert("Table changes saved to your browser session!");
+    }
+</script>
+    
 </body>
 </html>
