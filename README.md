@@ -1,2 +1,2 @@
 # School Hub
-## Demo simulation/Interactive simulated version
+## Demo simulation/Interactive simulated version.
