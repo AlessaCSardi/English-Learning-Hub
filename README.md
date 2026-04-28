@@ -1,2 +1,2 @@
-# Homework Hub
-  Demo simulation/ Interactive simulated version
+# School Hub
+## Demo simulation/ Interactive simulated version
